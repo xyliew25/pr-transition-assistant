@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 import streamlit as st
+import os
 
-from rag import rag
+from rag import load_document, rag
 from utility import check_credentials
 
 # TODO how to not make text field on focus red?
@@ -26,6 +27,8 @@ user_prompt = form.text_area("Enter your prompt here", height=200)
 
 if form.form_submit_button("Submit"):
     st.toast(f"User Input Submitted - {user_prompt}")
+    if not os.path.exists("./chroma_db"):
+        load_document() # only run once to create and populate db
     response = rag(user_prompt)
     st.write(response)
     print(f"User Input is {user_prompt}")

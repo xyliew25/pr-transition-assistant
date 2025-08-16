@@ -41,8 +41,7 @@ def load_document():
     splitted_documents = r_splitter.split_documents(docs)
 
     # Storage
-    vector_store = Chroma.from_documents(splitted_documents, embeddings_model, persist_directory="./chroma_db")
-    vector_store.persist()
+    Chroma.from_documents(splitted_documents, embeddings_model, persist_directory="./chroma_db")
 
 def rag(prompt):
     # Retrieval
@@ -67,5 +66,3 @@ def rag(prompt):
     )
     result = qa_chain.invoke(prompt)
     return result['result']
-
-# load_document() # only run once to create and populate db
