@@ -1,3 +1,10 @@
+try:
+    __import__("pysqlite3")
+    import sys
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass 
+
 import os
 import streamlit as st
 from langchain_community.document_loaders import WebBaseLoader
@@ -8,10 +15,6 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 from utility import count_tokens
-
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 os.environ["OPENAI_API_KEY"] = st.secrets['OPENAI_API_KEY']
 embeddings_model = OpenAIEmbeddings(model='text-embedding-3-small')
