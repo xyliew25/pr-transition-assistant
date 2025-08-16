@@ -57,7 +57,7 @@ def rag(prompt):
         embedding_function=embeddings_model
     )
 
-    template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Use three sentences maximum. Keep the answer as concise as possible. Always say "thanks for asking!" at the end of the answer.
+    template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. Keep the answer as concise as possible. Always end off with a relevant follow up question.
         {context}
         Question: {question}
         Helpful Answer:
